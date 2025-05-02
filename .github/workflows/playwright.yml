@@ -24,7 +24,7 @@ jobs:
       run: npx playwright test
 
     - name: Report test results
-      uses: dorny/test-reporter@v1
+      uses: dorny/test-reporter@v2
       if: always()
       with:
         name: Playwright Tests
