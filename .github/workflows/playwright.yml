@@ -13,21 +13,21 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+
     - name: Install dependencies
       run: npm ci
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
     - name: Run Playwright tests
       run: npx playwright test
-    # - name: Publish JUnit report
-    #   uses: actions/upload-artifact@v4
-    #   if: ${{ !cancelled() }}
-    #   with:
-    #     name: '**/pw-junit-test-results.xml'
-    #     path: .
-    #     retention-days: 30
-    - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v4
-      if: success() || failure() # always run even if the previous step fails
+
+    - name: Report test results
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
-        report_paths: '**/pw-junit-test-results.xml'
+        name: Playwright Tests
+        path: '**/pw-junit-test-results.xml'
+        reporter: junit
+    
