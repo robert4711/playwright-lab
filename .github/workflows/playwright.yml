@@ -29,5 +29,5 @@ jobs:
       with:
         name: Playwright Tests
         path: '**/pw-junit-test-results.xml'
-        reporter: junit
+        reporter: JUnit
     
